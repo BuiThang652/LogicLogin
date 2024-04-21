@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Buổi 7</title>
+  </head>
+  <body>
+    <form action="" id="login_form">
+      <input type="text" placeholder="Tên đăng nhập" name="username" class="username">
+      <p class="error_username"></p>
+      <!-- Tên đăng nhập không được để trống -->
+      <input type="password" placeholder="Mật khẩu" name="password" class="password">
+      <p class="error_password"></p>
+      <!-- Mật khẩu không được để trống hoặc nhỏ hơn 6 kí tự -->
+      <input type="submit" value="Đăng nhập" id="btn_login">
+    </form>
+
+    <script>
+      const login_form = document.querySelector("#login_form");
+      const btn_login = document.querySelector("#btn_login");
+      const value_username = document.querySelector(".username");
+      const value_password = document.querySelector(".password");
+      const error_username = document.querySelector(".error_username");
+      const error_password = document.querySelector(".error_password");
+
+      function btn_click_login(e) {
+        e.preventDefault();
+
+        let checkUsername = false;
+        let checkPassword = false;
+
+        if (value_username.value.trim() == "") {
+          error_username.innerText = "Tên đăng nhập không được để trống";
+        } else if (value_username.value !== "admin") {
+          error_username.innerText = "Sai tên đăng nhập";
+        } else {
+          error_username.innerText = "";
+          checkUsername = true;
+        }
+
+        if (value_password.value.trim() == "") {
+          error_password.innerText = "Mật khẩu không được để trống";
+        } else if (value_password.value.length < 6) {
+          error_password.innerText = "Mật khẩu phải có ít nhất 6 kí tự";
+        } else if (value_password.value !== "123456") {
+          error_password.innerText = "Mật khẩu không đúng";
+        } else {
+          error_password.innerText = "";
+          checkPassword = true;
+        }
+
+        if (checkUsername && checkPassword) {
+          window.location.href = "dangnhap.html"; 
+        }
+      }
+
+      btn_login.addEventListener("click", btn_click_login);
+    </script>
+  </body>
+</html>
